@@ -1,0 +1,96 @@
+Q.1->Why Java is called as platform independent?
+Ans->A source code which is created it is not directly created in Binary code(Machine Level Language).
+instead it is conveted in to and intermidiate language called as Byte-code.
+and we can excute that byte code on any platform which has (JDK) installed.
+Hence Java is called as platform independent but it is completely dependent on JDK.-(Java development Kit).
+
+
+Q.2->What are the characteristics/features of java?
+Ans->1. java is easy to understand. 
+2.it provides high security.
+3.it is platform independent.
+4.it is also called object oriented programming.
+5.it consist libraries.
+6.it suportes pakages.
+7.it is portable in nature.
+
+//syntax of java
+CLASS A
+//class block->
+{
+	Public static void main (string [] args)
+
+{
+	//method block / main method
+}
+
+}
+
+
+JVM->>JAVA VIRTUAL MACHINE->>
+it is an abstract machine it is called as virtual machine because it doesn't physically exists.
+it is a specification that provides run time environment in which java byte code can be excicuted 
+it can also run those programs which are written in other languages and compile to java byte code.
+
+
+jvm performs following main tasks->
+1-> loads code 
+2-> verify code
+3-> excicute code
+4-> provides run-time environment
+
+
+JRE->>JAVA RUN-TIME ENVIRONMENT->>
+it is a set of software tools which are used for developing java applications it is the implementation of jvm 
+and it physically exists.
+it contains a set of libraries + other files that jvm used at run-time.
+
+
+//diagram
+jRE -> containing (JVM , SET OF LIBRARIES, OTHER_FILES)
+
+
+
+JDK->> JAVA DEVELOPMENT KIT->>
+it is a software development enviroment which is used to develop java applications it physically exists.
+it contains JRE + development tools
+
+The JDK contains private jVM and few other sources such as -> an interpreter or loder (java, compiler javac, an acheiver[jar],
+a documention generator[java doc] etc..)
+to complete the development of java applications.
+
+
+//diagram
+JDK containing->(development tools -> eg. javac, etc.)
+
+
+Elements of Java->
+1. Class name
+2. Varible name
+3. Method name
+4. Interface name
+5. Pakage name
+
+
+
+CLASS NAMING CONVENTIONS->
+1. The first of class name can be written in terms of uppercase or lowercase.
+   the rule is not mandatory but it will barrier based on companies standards.
+
+2. we cannot give space between the class name in (we will get compile time error..) 
+
+3. we can use 2 special characters in Java for giving a class name (_ and &)..
+   we cannot start class name with the numerical value (we get compile time error..)
+   In order to use numerical values we follow alpha numeric rules eg.-> mango1.java
+
+4. we cannot give keyword as a class name(reserved words that are predefined)..
+
+
+
+LITERALS->>
+literals are the different types of values we use in java programming. 
+
+1. NUMERERS   ->int -> 1,2,3...    float ->1.2,1.333
+2. CHARACTERS ->'a' , 'b'
+3. STRING     ->"abcd","r"
+4. BOOLEAN    ->True & false
