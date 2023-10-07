@@ -264,9 +264,10 @@ int main()
 	freopen("error.txt", "w", stderr);
 #endif
 	/*---------------------------------------------*/
-	make some changes in the file because i am pushing this
-	again doing the push force method in the sublime text github
-	fuck me hard baby
+	// make some changes in the file because i am pushing this
+	// again doing the push force method in the sublime text github
+	// fuck me hard baby
+	// my last day so bad that i can't make u describe it man
 
 	return 0;
 }
