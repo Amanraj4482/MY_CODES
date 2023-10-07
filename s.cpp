@@ -253,9 +253,6 @@ ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 /*----------------------------------------------------------------------*/
 
-void solve() {
-
-}
 
 int main()
 {
@@ -264,11 +261,52 @@ int main()
 	freopen("error.txt", "w", stderr);
 #endif
 	/*---------------------------------------------*/
-	// make some changes in the file because i am pushing this
-	// again doing the push force method in the sublime text github
-	// fuck me hard baby
-	// my last day so bad that i can't make u describe it man
+	int t; cin >> t;
+	vector<pair<vector<int>, int>> vec;
+	while (t--) {
+		int n ; cin >> n;
+		vi v(n);
+		for (int i = 0; i < n; ++i) {
+			cin >> v[i];
+		}
+		vec.pb(make_pair(v, n));
+	}
+	int x; cin >> x;
+	if (x == 0) {
+		cout << "0" << endl;
+	}
+	else {
+		int i = 1;
+		vector<pair<int, pair<int, int>>> pa;
+		for (const auto& pair : vec) {
+			const vi & v = pair.ff;
+			int c = pair.ss;
+			for (int p : v) cerr << p << " ";
+			for (int p : v) {
+				if (x == p) {
+					pa.pb(make_pair(x, make_pair(i, c)));
+				}
 
+			}
+			i++;
+			cerr << c << endl;
+		}
+		int d = 1;
+		int mini = INT_MAX;
+		cerr << "------------------" << endl;
+		for (const auto& c : pa) {
+			int key1 = c.ff;
+			int key2 = c.ss.ff;
+			int key3 = c.ss.ss;
+			if (mini > key3) {
+				mini = key3;
+				cout << d + 1 << endl;
+			}
+			if (mini == key3) {
+				cout << key2 << " ";
+			}
+			cerr << key1 << " " << key2 << " " << key3 << endl;
+		}
+	}
 	return 0;
 }
-// so the rule is first commit and then push it
