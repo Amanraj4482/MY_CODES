@@ -264,14 +264,7 @@ int main()
 	freopen("error.txt", "w", stderr);
 #endif
 	/*---------------------------------------------*/
-	// This is Aman me doing the ctrl shift x
-	// everything up to the top
+	make some changes in the file because i am pushing this
 
-
-
-	updated this now what to do man
-
-		return 0;
+	return 0;
 }
-
-
