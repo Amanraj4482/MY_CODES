@@ -1860,107 +1860,1665 @@
 /*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
-#include <bits/stdc++.h>
-using namespace std;
+// #include <bits/stdc++.h>
+// using namespace std;
 
-typedef long long ll;
-typedef long double lld;
-typedef unsigned long long ull;
-typedef vector<ll> vl;
-typedef vector<int> vi;
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
 
-const ll mod  = 1e9 + 7;
-const ll maxn = 1e5 + 1;
-const ll inf  = 5e18 ;
-const ll minf = -inf ;
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
 
-#define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-#define pb push_back
-#define ff first
-#define ss second
-#define mid(s,e) (s+(e-s)/2)
-#define check cerr<<"~~~"<<endl;
-#define endl "\n"
-#define bl cout<<endl;
-#define bl_ cerr<<endl;
-#define sz(x) ((int)(x).size())
-#define all(x) (x).begin(), (x).end()
-#define mine(vec) *min_element(all(vec))
-#define maxe(vec) *max_element(all(vec))
-#define sumarr(vec)  accumulate(all(vec),0)
-int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
 
-#ifndef ONLINE_JUDGE
-#define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
-#else
-#define debug(x)
-#endif
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
 
-void _print(ll t) {cerr << t;}
-void _print(int t) {cerr << t;}
-void _print(string t) {cerr << t;}
-void _print(char t) {cerr << t;}
-void _print(lld t) {cerr << t;}
-void _print(double t) {cerr << t;}
-void _print(ull t) {cerr << t;}
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
 
-template <class T, class V> void _print(pair <T, V> p);
-template <class T> void _print(vector <T> v);
-template <class T> void _print(set <T> v);
-template <class T, class V> void _print(map <T, V> v);
-template <class T> void _print(multiset <T> v);
-template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
-template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
-bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
-ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
-ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
-#define present__(container, element)(container.find(element) != container.end())
-#define vpresent__(container, element)(find(all(container), element) != container.end())
-/*----------------------------------------------------------------------*/
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// #define present__(container, element)(container.find(element) != container.end())
+// #define vpresent__(container, element)(find(all(container), element) != container.end())
+// /*----------------------------------------------------------------------*/
 
-void solve() {
-	int n, m; cin >> n >> m;
-	vi p(n);
-	vector<string> v(n), b(m);
-	map<string, int> fb;
-	for (int i = 0; i < n; ++i) {
-		cin >> v[i];
-		fb[v[i]]++;
-	}
-	for (int i = 0; i < m; ++i) {
-		cin >> b[i];
-		if (fb[v[i]] == fb[b[i]]) fb[b[i]]--;
-	}
-	for (int i = 0; i < n; ++i)
-		cin >> p[i];
-	int sum = 0;
-	debug(fb)
-	for (auto & it : fb) {
-		if ((vpresent__(b, it.ff) == 0)) sum += p[0];
-		int k = 1;
-		debug(sum)
-		if ((vpresent__(b, it.ff) == 1) && it.ss == 0) {
-			debug(k)
-			debug(sum)
-			sum += p[k++];
-		}
-	}
-	debug(sum)
-}
-int main()
-{
-	fastio()
-#ifndef ONLINE_JUDGE
-	freopen("error.txt", "w", stderr);
-#endif
-	/*---------------------------------------------*/
+// void solve() {
+// 	int n, m; cin >> n >> m;
+// 	vector<string> v(n), b(m);
+// 	for (int i = 0; i < n; ++i) {
+// 		cin >> v[i];
+// 	}
+// 	for (int i = 0; i < m; ++i) {
+// 		cin >> b[i];
+// 	}
+// 	vector<int> p(m + 1);
+// 	for (int i = 0; i <= m; i++)
+// 		cin >> p[i];
+// 	int temp = p[0];
+// 	int ans = 0;
+// 	for (int i = 0; i < n; i++) {
+// 		for (int j = 0; j < m; j++) {
+// 			if (v[i] == b[j]) {
+// 				temp = p[j + 1];
+// 				break;
+// 			}
+// 		}
+// 		ans += temp;
+// 	}
+// 	cout << ans << endl;
 
-	solve();
+// }
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
 
 
-	return 0;
-}
+// 	return 0;
+// }
+// /*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	ll n; cin >> n;
+// 	ll a;
+// 	vi v;
+// 	while (cin >> a) v.pb(a);
+// 	ll sum = 0;
+// 	ll k = 1;
+// 	for (ll i = 1; i <= 7 * n; ++i)
+// 	{
+// 		sum += v[i - 1];
+// 		if (i == 7 * k) {
+// 			cout << sum << endl;
+// 			k++;
+// 			sum = 0;
+// 		}
+// 	}
+
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }
+
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+// // for every m size of the string there should be conditionn satified
+// // (m + 1 -i )
+// bool is_palindrome(string s) {
+// 	return equal(all(s) - sz(s) / 2, s.rbegin());
+// }
+// void solve() {
+// 	int n; cin >> n;
+// 	vector<string>s(n);
+// 	for (int i = 0; i < n; ++i)
+// 		cin >> s[i];
+
+// 	string t = "";
+// 	bool f = 0;
+// 	for (int i = 0; i < n; ++i)
+// 	{
+// 		t.append(s[i]);
+// 		for (int j = i + 1; j < n; j++) {
+// 			t.append(s[j]);
+// 			if (is_palindrome(t) && sz(t) > 1) {
+// 				f = 1;
+// 				for (int k = 0; k < sz(t); k++) {
+// 					debug(t[k])
+// 					if (t[k] != t[sz(t) - k - 1]) f = 0;
+// 				}
+// 			}
+// 			if (f) break;
+// 			else {
+// 				t = "";
+// 				t.append(s[i]);
+// 			}
+// 		}
+// 		t = "";
+// 	}
+// 	if (f) cout << "Yes" << endl;
+// 	else cout << "No" << endl;
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+// 	solve();
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	int n; cin >> n;
+// 	string s, p; cin >> s;
+// 	for (int i = 0; i < n; ++i)
+// 	{
+// 		for (int j = 0; j < 2; ++j)
+// 		{
+// 			p += s[i];
+// 		}
+// 	}
+// 	debug(p)
+
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }c
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	pair<string, int> mp;
+// 	vi v;
+// 	int temp;
+// 	int  i = 0;
+// 	while (cin >> temp) {
+// 		v.pb(temp);
+// 		mp = make_pair(to_string(temp), i);
+// 		i++;
+// 	}
+
+
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+
+// 	solve();
+
+// 	return 0;
+// }
+
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	int  n; cin >> n;
+// 	vi v(n);
+// 	for (int i = 0; i < n; ++i)
+// 	{
+// 		cin >> v[i];
+// 	}
+// 	bool f = 1;
+// 	for (int i = 1; i < n; ++i)
+// 	{
+// 		if (v[i] != v[i - 1]) f = 0;
+// 	}
+// 	if(f) cout<<"Yes"<<endl;
+// 	else cout<<"No"<<endl;
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+// // bool f(ll p) {
+// // 	while (p % 2 == 0) {
+// // 		p /= 2;
+// // 	}
+// // 	while (p % 3 == 0) {
+// // 		p /= 3;
+// // 	}
+// // 	return p == 1;
+// // }
+// bool f(ll p) {
+// 	while ((p & 1) == 0) {
+// 		p >>= 1;
+// 	}
+// 	while (p % 3 == 0) {
+// 		p /= 3;
+// 	}
+// 	return p == 1;
+// }
+
+// void solve() {
+// 	ll n; cin >> n;
+// 	if (f(n))cout << "Yes" << endl;
+// 	else cout << "No" << endl;
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	int n; cin >> n;
+// 	string p ; cin >> p;
+// 	string ama = p;
+// 	vector<string>s;
+// 	string d;
+// 	while (cin >> d) {
+// 		s.pb(d);
+// 	}
+// 	debug(s)
+// 	bool f = 0;
+// 	for (int i = 0; i < n; ++i)
+// 	{
+// 		if (p == s[i]) {
+// 			cout << i + 1 << endl;
+// 			f = 1;
+// 		}
+// 		for (int j = i + 1; j < n; ++j)
+// 		{
+// 			if (p.find(s[j]) != string::npos) {
+// 				cout << j + 1 << endl;
+// 				f = 0;
+// 			}
+// 			if (sz(ama) == sz(s[j]) + 1) {
+// 				debug(s[j])
+// 			}
+// 		}
+// 	}
+
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// Last visited array
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void lastVisitedIntegers(vector<string>& words) {
+// 	string t;
+// 	int index = 0;
+// 	vector<string> d;
+// 	bool f = 0;
+// 	int c = 0;
+// 	for (int i = 0; i < (int) words.size(); ++i)
+// 	{
+// 		if (!f) {
+// 			index = i;
+// 		}
+// 		if (words[i] == "prev" && words[i - 1] != "prev") {
+// 			c++;
+// 			d.pb(to_string(index));
+// 			f = 1;
+// 			index = index - c;
+// 		}
+// 		else {
+// 			d.pb(to_string(i));
+// 		}
+// 	}
+// 	debug(d)
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+// 	vector<string> v;
+// 	string a;
+// 	while (cin >> a) v.pb(a);
+// 	lastVisitedIntegers(v);
+
+
+
+// 	return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+// void solve() {
+// 	int n , m; cin >> n >> m;
+// 	vector<string> d(n);
+// 	for (int i = 0; i < n; ++i)
+// 		cin >> d[i];
+
+// 	vector<pair<vector<string>, vi>>vt;
+// 	vector<string>dd(m);
+// 	vi qqq;
+// 	vi pp(m);
+// 	for (int i = 0; i < m; ++i)
+// 		cin >> dd[i];
+
+// 	int temp = 0;
+// 	cin >> temp;
+// 	for (int i = 0; i < m; i++) {
+// 		cin >> pp[i];
+// 	}
+// 	vt.pb(make_pair(dd, pp));
+// 	int sum = 0;
+// 	for (int i = 0; i < n; ++i)
+// 	{
+// 		for (int j = 0; j < m; ++j)
+// 		{
+// 			if (d[i] == vt[0].ff[j]) {
+// 				qqq.pb(vt[0].ss[j]);
+// 				break;
+// 			}
+// 			if (j == m - 1) {
+// 				qqq.pb(temp);
+// 			}
+// 		}
+// 	}
+// 	cout << sumarr(qqq) << endl;
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+
+// 	solve();
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// base 2
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// // void solve() {
+// // 	ll n;
+// // 	ll sq = 0;
+// // 	ll i = 0;
+// // 	while (cin >> n) {
+// // 		if (n == 1) {
+// // 			sq += pow(2, i);
+// // 		}
+// // 		i++;
+// // 	}
+// // 	cout << sq << endl;
+// // }
+// void solve() {
+// 	vector<int> v; ll n; ll ans = 0;
+// 	while (cin >> n)
+// 		v.push_back(n);
+// 	for (int i = 0; i < (int) v.size(); ++i)
+// 	{
+// 		if (v[i] == 1)
+// 		{
+// 			ans += pow(2, i);
+// 		}
+// 	}
+// 	cout << ans; bl
+// }
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	int n ; cin >> n;
+// 	int abc = n;
+// 	int d = 1;
+// 	int c = 0;
+// 	for (int i = 0; i < n; ++i)
+// 	{
+// 		d = abc / 5;
+// 		c = d * 5;
+// 	}
+// 	if (c < n && c + 2 < n) {
+// 		cout << (d + 1) * 5;
+// 	}
+// 	else if (c <= n || c + 3 > n) cout << c << endl;
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	vector<pair<char, int>>dk;
+// 	char a, b; cin >> a >> b;
+// 	dk.pb(make_pair('A', 0));
+// 	dk.pb(make_pair('B', 3));
+// 	dk.pb(make_pair('C', 4));
+// 	dk.pb(make_pair('D', 8));
+// 	dk.pb(make_pair('E', 9));
+// 	dk.pb(make_pair('F', 14));
+// 	dk.pb(make_pair('G', 23));
+// 	int sum = 0;
+// 	int sum2 = 0;
+// 	for (auto & i : dk) {
+// 		char c = toupper(a);
+// 		char d = toupper(b);
+// 		if (a == c) {
+// 			if (i.ff == c) {
+// 				sum = i.ss;
+// 			}
+// 		}
+// 		if (b == d) {
+// 			if (i.ff == d) {
+// 				sum2 = i.ss;
+// 			}
+// 		}
+// 	}
+// 	cout << (sum2 > sum ? sum2 - sum : sum - sum2) << endl;
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	solve();
+
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	string s; cin >> s;
+// 	string t;
+// 	if (s == "()") {
+// 		cout << "No" << endl;
+// 		return;
+// 	}
+// 	int i = 0; bool ch = 0;
+// 	while (i < sz(s) - 1) {
+// 		if (s.substr(i, 2) == ")(") {
+// 			ch = 1; break;
+// 		}
+// 		i++;
+// 	}
+// 	if (ch) {
+// 		for (int i = 0; i < sz(s); ++i)
+// 			t += "(";
+// 		for (int i = 0; i < sz(s); ++i)
+// 			t += ")";
+// 		cout << "Yes\n" << t << endl;
+
+// 	}
+// 	else {
+// 		for (int i = 0; i < sz(s); ++i)
+// 			t += "()";
+// 		if (t == s) cout << "No" << endl;
+// 		else cout << "Yes\n" << t << endl;
+// 	}
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	int t ; cin >> t;
+// 	// t = 1;
+// 	while (t--) solve();
+
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	ll n; cin >> n;
+// 	vi a(n), b(n);
+// 	for (ll i = 0; i < n; ++i)
+// 		cin >> a[i];
+// 	for (ll i = 0; i < n; ++i)
+// 		cin >> b[i];
+
+// 	ll mina = mine(a);
+// 	ll minb = mine(b);
+
+// 	ll suma = 0;
+// 	ll sumb = 0;
+
+// 	for (ll i = 0; i < n; ++i)
+// 		suma += a[i];
+// 	for (ll i = 0; i < n; ++i)
+// 		sumb += b[i];
+
+// 	sumb += mina * n;
+// 	suma += minb * n;
+// 	if (suma < sumb) {
+// 		cout << suma << endl;
+// 	}
+// 	else cout << sumb << endl;
+// }
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+// 	int t ; cin >> t;
+// 	// t = 1;
+// 	while (t--) solve();
+
+
+// 	return 0;
+// }
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+
+// }
+
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+
+
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+
+// make it zero codeforces ------->
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// typedef long long ll;
+// typedef long double lld;
+// typedef unsigned long long ull;
+// typedef vector<ll> vl;
+// typedef vector<int> vi;
+
+// const ll mod  = 1e9 + 7;
+// const ll maxn = 1e5 + 1;
+// const ll inf  = 5e18 ;
+// const ll minf = -inf ;
+
+// #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+// #define pb push_back
+// #define ff first
+// #define ss second
+// #define mid(s,e) (s+(e-s)/2)
+// #define check cerr<<"~~~"<<endl;
+// #define endl "\n"
+// #define bl cout<<endl;
+// #define bl_ cerr<<endl;
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define mine(vec) *min_element(all(vec))
+// #define maxe(vec) *max_element(all(vec))
+// #define sumarr(vec)  accumulate(all(vec),0)
+// int digit_sum(int n) {int ret = 0; while (n) {ret += n % 10; n /= 10;} return ret;}
+
+// #ifndef ONLINE_JUDGE
+// #define debug(x) cerr<<#x<<" "; _print(x); cerr << endl;
+// #else
+// #define debug(x)
+// #endif
+
+// void _print(ll t) {cerr << t;}
+// void _print(int t) {cerr << t;}
+// void _print(string t) {cerr << t;}
+// void _print(char t) {cerr << t;}
+// void _print(lld t) {cerr << t;}
+// void _print(double t) {cerr << t;}
+// void _print(ull t) {cerr << t;}
+
+// template <class T, class V> void _print(pair <T, V> p);
+// template <class T> void _print(vector <T> v);
+// template <class T> void _print(set <T> v);
+// template <class T, class V> void _print(map <T, V> v);
+// template <class T> void _print(multiset <T> v);
+// template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+// template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+// template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+// bool prime(ll a) { if (a == 1) return 0; for (int i = 2; i <= round(sqrt(a)); ++i) if (a % i == 0) return 0; return 1; }
+// ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b); }
+// ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+// /*----------------------------------------------------------------------*/
+
+// void solve() {
+// 	int n; cin >> n;
+// 	vi v(n);
+// 	for (int i = 0; i < n; ++i)
+// 		cin >> v[i];
+
+// 	if (n % 2 == 0) {
+// 		cout << "2" << endl;
+// 		cout << "1" << " " << n << endl;
+// 		cout << "1" << " " << n << endl;
+// 	}
+// 	else {
+// 		cout << "4" << endl;
+// 		cout << "1" << " " << "2" << endl;
+// 		cout << "1" << " " << "2" << endl;
+// 		cout << "2" << " " << n << endl;
+// 		cout << "2" << " " << n << endl;
+// 	}
+// 	return;
+// }
+// int main()
+// {
+// 	fastio()
+// #ifndef ONLINE_JUDGE
+// 	freopen("error.txt", "w", stderr);
+// #endif
+// 	/*---------------------------------------------*/
+
+
+// 	int t ; cin >> t;
+// 	// t = 1;
+// 	while (t--) solve();
+
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
