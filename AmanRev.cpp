@@ -1,3 +1,40 @@
+// int interpolationSearch( vi & v, int tar) {
+// 	int low = 0, high = sz(v) - 1;
+// 	while (low <= high && v[low] <= tar && v[high] >= tar) {
+// 		int pos = low + (tar - v[low]) / (v[high] - v[low] * (high - low));
+// 		if (v[pos] == tar) return pos;
+// 		else if (v[pos] < tar) low = pos + 1;
+// 		else high = pos - 1;
+// 	}
+// 	return -1;
+// }
+/*---------------------------------*/
+// int binarySearch(vi & v, int tar) {
+// 	int s = 0, e = sz(v) - 1;
+// 	while (s <= e) {
+// 		int mid = (s + e) / 2;
+// 		if (tar == v[mid]) return mid;
+// 		else if (tar < v[mid]) e = mid - 1;
+// 		else s = mid + 1;
+// 	}
+// 	return -1;
+// }
+/*---------------------------------*/
+// void removeDuplicates(vi & v ) {
+// 	int j = 0;
+// 	for (int i = 1; i < sz(v); ++i)
+// 	{
+// 		if (v[i] != v[j]) {
+// 			j++;
+// 			v[j] = v[i]; //move unique element to front
+// 		}
+// 	}
+// 	v.resize(j + 1); // upto index j=3 then there are 4 unique element
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+
 // stack with array
 
 // #include <bits/stdc++.h>
@@ -339,27 +376,110 @@
 // 	printLL(head); en
 // 	deleteEnd(head);
 // 	printLL(head); en
-
+//	// 50 40 30 20 10
+//	// 50 40 30 80 20 10
+//	// 40 30 80 20 10
+//	// 40 30 80 20
 // 	return 0;
 // }
 /*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
-// Circular Linked List
+// Doubly Linked List-----> All operations
+// for the deletion of the node there can be 3 cases from the beg , end , and pos
 #include <bits/stdc++.h>
 using namespace std;
-#define en cout<<"\n";
 
-
+typedef struct node {
+	int data;
+	struct node * next, * prev;
+} Node;
+Node * createNode(int value) {
+	Node * newNode = (Node *)malloc(sizeof(Node));
+	newNode->next = newNode->prev = NULL;
+	newNode->data = value;
+	return newNode;
+}
+void insertAtBeg(Node *& head, Node*& tail, int value) {
+	Node * newNode = createNode(value);
+	if (head == nullptr)tail = newNode;
+	else head->prev = newNode;
+	newNode->next = head;
+	head = newNode;
+}
+void insertAtEnd(Node *& head, Node*& tail, int value) {
+	Node * newNode = createNode(value);
+	if (head == nullptr) {
+		// both head and tail pointing to the newNode
+		tail = head = newNode;
+		return;
+	}
+	// step 1: first i given the address of the newNode to the next of the tail
+	// step 2: then the address of the tail to the newNode prev
+	// step 3:and finally pointing the tail to the end of the list that is the newNode
+	tail->next = newNode;
+	newNode->prev = tail;
+	tail = newNode;
+}
+void insertAtPos(Node *& head, Node*& tail, int value, int pos) {
+	Node * newNode = createNode(value);
+	Node * curr = head;
+	int i = 0;
+	while (i < pos - 1) {
+		curr = curr->next; i++;
+	}
+	newNode->prev = curr;
+	newNode->next = curr->next;
+	curr->next = newNode;
+	newNode->next->prev = newNode;
+}
+void deleteBeg(Node *&head) {
+	if (head == NULL) {
+		return;
+	}
+	Node * temp = head;
+	head = head->next;
+	delete temp;
+}
+void deleteEnd(Node*& head, Node *& tail) {
+	if (tail == NULL) {
+		return;
+	}
+	Node * temp = tail;
+	tail = tail->prev;
+	if (tail != NULL) tail ->next = NULL;
+	else head = NULL;
+	delete temp;
+}
+void printing(Node *&head) {
+	Node * curr = head;
+	while (curr != nullptr) {
+		cout << curr->data << " ";
+		curr = curr->next;
+	}
+	cout << endl;
+}
+void insertionLL(Node *& head, Node*&tail) {
+	insertAtEnd(head, tail, 10);
+	insertAtEnd(head, tail, 20);
+	insertAtEnd(head, tail, 30);
+	insertAtEnd(head, tail, 40);
+	insertAtBeg(head, tail, 60);
+	insertAtBeg(head, tail, 70);
+	insertAtBeg(head, tail, 80);
+	int index = 2;
+	insertAtPos(head, tail, 100, index);
+	printing(head);
+	// deleteBeg(head);
+	// deleteEnd(head, tail);
+	printing(head);
+}
 int main() {
-
+	Node * head = NULL, * tail = NULL ;
+	insertionLL(head, tail);
 	return 0;
 }
-
-
-
-
-
-
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
 
 
 
