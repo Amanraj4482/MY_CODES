@@ -16,13 +16,16 @@ int knapSack(int wt[],int val[],int w,int n){
 }
 */
 /*
-// Approach 2: using the dp table
+// Approach 2: using the dp table-->(Top-Down Version)
 // the idea of calling the recursion function we want to emit this
+// Step 1 : TopDown -->initilization
+// Step 2 : change the Recursion calls to the iterative version
+// the base condition of the recursive fun changes to the initilisation
 
 
-
-
-
-
+for(int i=0;i<n+1;i++)
+for(int j=0;j<w+1;j++){
+	if(i==0||j==0) dp[i][j]=0;
+}
 
 */
