@@ -43,37 +43,37 @@
 // #define en cout<<"\n";
 
 // typedef struct Stack {
-// 	int capacity, top, *v;
+// 	int capacity, top, *arr;
 // } St;
 // St* createStack(int capacity) {
 // 	St *newStack = (St*)malloc(sizeof(St));
 // 	newStack->capacity = capacity;
 // 	newStack->top = -1;
-// 	newStack->v = (int*)malloc(newStack->capacity * sizeof(4));
+// 	newStack->arr = (int*)malloc(newStack->capacity * sizeof(4));
 // 	return newStack;
 // }
-// int isFull(St * newStack) {return newStack->top == newStack->capacity - 1;}
+// int isFull(St * newStack) {return newStack->top + 1 == newStack->capacity;}
 // int isEmpty(St * newStack) {return newStack->top == -1;}
 // void pushElement (St * newStack, int data) {
 // 	if (isFull(newStack)) return ;
-// 	newStack->v[++newStack->top] = data; // preincrememt of the index
+// 	newStack->arr[++newStack->top] = data; // preincrememt of the index
 // }
 // int popElement(St * newStack) {
 // 	if (isEmpty(newStack)) return 0;
-// 	return newStack->v[newStack->top--];
+// 	return newStack->arr[newStack->top--];
 // }
 // int peekElement(St * newStack) {
 // 	if (isEmpty(newStack)) return 0;
-// 	return newStack->v[newStack->top];
+// 	return newStack->arr[newStack->top];
 // }
 // void destroyStack(St * newStack) {
-// 	free(newStack->v);
+// 	free(newStack->arr);
 // 	free(newStack);
 // }
 // void printStack(St * newStack) {
 // 	if (isEmpty(newStack)) return ;
 // 	for (int i = newStack->top; i >= 0; i--)
-// 		cout << newStack->v[i] << " ";
+// 		cout << newStack->arr[i] << " ";
 // }
 // int main() {
 // 	St * newStack = createStack(100); //of capacity 100
@@ -170,7 +170,7 @@
 
 // #define cap 5
 // typedef struct queue {
-// 	int front, rear, sz, v[cap];
+// 	int front, rear, sz, arr[cap];
 // } Queue;
 // void ini(Queue *& q) {
 // 	q->front = 0, q->rear = -1, q->sz = 0;
@@ -180,7 +180,7 @@
 // void enqueue(Queue * q, int data) { // from the rear part
 // 	if (isFull(q)) return;
 // 	q->rear = (q->rear + 1) % cap;
-// 	q->v[q->rear] = data;
+// 	q->arr[q->rear] = data;
 // 	q->sz++;
 // }
 // int dequeue(Queue * q) {
@@ -192,11 +192,11 @@
 // }
 // int peekElement(Queue * q) {
 // 	if (isEmpty(q))return 0;
-// 	return q->v[q->front];
+// 	return q->arr[q->front];
 // }
 // void printQueue(Queue * q) {
 // 	if (isEmpty(q))return;
-// 	for (int i = 0; i < q->sz; i++) cout << q->v[(q->front + i) % cap] << " ";
+// 	for (int i = 0; i < q->sz; i++) cout << q->arr[(q->front + i) % cap] << " ";
 // }
 // int main() {
 // 	Queue *q = new Queue; ini(q);
@@ -354,6 +354,26 @@
 // 	prev->next = nullptr;
 // 	delete curr;
 // }
+// void deleteAtPos(Nd *& head, int pos) {
+// 	if (head == nullptr) {
+// 		cout << "List is empty" << endl;
+// 		return;
+// 	}
+// 	if (pos == 0) {
+// 		deleteBeg(head);
+// 		return;
+// 	}
+// 	Nd * curr = head, *prev = nullptr;
+// 	int i = 0;
+// 	while (curr != nullptr and i < pos - 1) {
+// 		prev = curr;
+// 		curr = curr->next;
+// 		i++;
+// 	}
+// 	if (curr == nullptr)cout << "Out of Range" << endl;
+// 	prev->next = curr->next;
+// 	delete curr;
+// }
 // void printLL(Nd * head) {
 // 	Nd * curr = head;
 // 	while (curr != nullptr) {
@@ -369,24 +389,30 @@
 // 	insertBeg(head, 40);
 // 	insertBeg(head, 50);
 
+// 	// printLL(head); en
+// 	// insertPosition(head, 80, 3);
+// 	// printLL(head); en
+// 	// deleteBeg(head);
+// 	// printLL(head); en
+// 	// deleteEnd(head);
 // 	printLL(head); en
-// 	insertPosition(head, 80, 3);
+// 	deleteAtPos(head, 3); en
 // 	printLL(head); en
-// 	deleteBeg(head);
-// 	printLL(head); en
-// 	deleteEnd(head);
-// 	printLL(head); en
-//	// 50 40 30 20 10
-//	// 50 40 30 80 20 10
-//	// 40 30 80 20 10
-//	// 40 30 80 20
+// 	// 50 40 30 20 10
+// 	// 50 40 30 80 20 10
+// 	// 40 30 80 20 10
+// 	// 40 30 80 20
+// 	// when deleting the 3rd node
+// 	// 50 40 20 10
+
 // 	return 0;
 // }
 /*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
 // Doubly Linked List-----> All operations
 // for the deletion of the node there can be 3 cases from the beg , end , and pos
-#include <bits/stdc++.h>
+
+#include<bits/stdc++.h>
 using namespace std;
 
 typedef struct node {
@@ -450,6 +476,35 @@ void deleteEnd(Node*& head, Node *& tail) {
 	else head = NULL;
 	delete temp;
 }
+void deletePos(Node *& head, int pos) {
+	if (pos == 0) {
+		return;
+	}
+	if (pos == 1) {
+		deleteBeg(head);
+		return;
+	}
+	if (pos > 1) {
+		int i = 0;
+		Node *curr = head;
+		Node *prev = nullptr;
+		while (curr != nullptr && i < pos - 1) {
+			prev = curr;
+			curr = curr->next;
+			i++;
+		}
+		if (curr == nullptr) {
+			printf("Out of Bounds");
+			return;
+		}
+		prev->next = curr->next;
+		if (curr->next != nullptr) {
+			curr->next->prev = prev;
+		}
+		delete curr;
+	}
+}
+
 void printing(Node *&head) {
 	Node * curr = head;
 	while (curr != nullptr) {
@@ -466,11 +521,12 @@ void insertionLL(Node *& head, Node*&tail) {
 	insertAtBeg(head, tail, 60);
 	insertAtBeg(head, tail, 70);
 	insertAtBeg(head, tail, 80);
-	int index = 2;
-	insertAtPos(head, tail, 100, index);
+	// int index = 2;
+	// insertAtPos(head, tail, 100, index);
 	printing(head);
 	// deleteBeg(head);
 	// deleteEnd(head, tail);
+	// deletePos(head, 5);
 	printing(head);
 }
 int main() {
@@ -480,6 +536,140 @@ int main() {
 }
 /*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
+// Circular Linked List--->
+// #include <bits/stdc++.h>
+// using namespace std;
+// typedef struct node {
+// 	int data;
+// 	struct node * next;
+// } Node;
+// Node * createNode(int value) {
+// 	Node * newNode = (Node*)malloc(sizeof(Node));
+// 	newNode->data = value;
+// 	newNode->next = NULL;
+// 	return newNode;
+// }
+// void insertAtBeg(Node *&head, int value) {
+// 	Node * newNode = createNode(value);
+// 	if (head == NULL) {
+// 		head = newNode; // the newNode becomes the head Node,
+// 		newNode->next = head; // and it's next pointer is set to itself , creating a circular reference
+// 		return;
+// 	}
+// 	else {
+// 		newNode->next = head->next; // next pointer of the newNode is set to the next pointer o fthe current head Node, This ensures that the new node is inserted after the head node
+// 		head->next = newNode; // the next pointer of the current head node is updated to point to the newNode effectively inserting the new Node at the begnining of the circular linked list
+// 	}
+
+// }
+// void insertions(Node *& head) {
+// 	insertAtBeg(head, 10);
+// 	insertAtBeg(head, 20);
+// 	insertAtBeg(head, 30);
+// }
+// int main() {
+// 	Node * head;
+// 	insertions(head);
+// 	return 0;
+// }
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+// #include <bits/stdc++.h>
+// using namespace std;
+// #define endl "\n"
+// #define sz(x) ((int)(x).size())
+// #define all(x) (x).begin(), (x).end()
+// #define rall(x) (x).rbegin(), (x).rend()
+// #define each(v) for(auto it:v){cout<<it<<" ";}cout<<endl;
+// #define tr(it, mp) for(auto it = mp.begin(); it != mp.end(); ++it)
+
+// void bubbleSort(vector<int>&v) {
+// 	for (int i = 1; i < sz(v); i++) {
+// 		for (int j = 0; j < sz(v) - i; j++) {
+// 			if (v[j] > v[j + 1]) {
+// 				swap(v[j], v[j + 1]);
+// 			}
+// 		}
+// 	}
+// }
+// void insertionSort(vector<int>&v) {
+// 	int i, j, element;
+// 	for (i = 1; i < sz(v); i++) {
+// 		j = i; element = v[i];
+// 		while (j > 0 and v[j - 1] > element) {
+// 			v[j] = v[j - 1]; j--;
+// 		}
+// 		v[j] = element;
+// 	}
+// }
+// void selectionSort(vector<int>&v) {
+// 	int i, j, minpos;
+// 	for (i = 0; i < sz(v) - 1; i++) {
+// 		minpos = i;
+// 		for (j = i + 1; j < sz(v); j++) if (v[j] < v[minpos])minpos = j;
+// 		if (minpos != i) swap(v[i], v[minpos]);
+// 	}
+// }
+// void merge(vector<int>& v , int low , int mid, int high) {
+// 	int index = 0, left = low, right = mid + 1;
+// 	vector<int>temp(high - low + 1);
+// 	while (left <= mid && right <= high) {
+// 		if (v[left] <= v[right]) temp[index++] = v[left++];
+// 		else temp[index++] = v[right++];
+// 	}
+// 	while (left <= mid) temp[index++] = v[left++];
+// 	while (right <= high) temp[index++] = v[right++];
+// 	for (int i = low; i <= high; ++i) v[i] = temp[i - low];
+// }
+// void mergeSorting(vector<int> & v, int low , int high ) {
+// 	if (low == high)return;
+// 	int mid = (low + high) / 2;
+// 	mergeSorting(v, low, mid);
+// 	mergeSorting(v, mid + 1, high);
+// 	merge(v, low, mid, high);
+// }
+// int partition(vector<int> &v, int left, int right) {
+// 	int pivot = v[left]; // Choose the first element as the pivot
+// 	int i = left + 1; // Index for elements less than or equal to pivot
+// 	for (int j = left + 1 ; j <= right; ++j) {
+// 		if (v[j] <= pivot) {
+// 			swap(v[i], v[j]);
+// 			i++;
+// 		}
+// 	}
+// 	// Place pivot in its correct position
+// 	swap(v[left], v[i - 1]);
+// 	return i - 1;
+// }
+// void quickSort(vector<int>&v , int s, int e) {
+// 	if (s < e) {
+// 		int pivot_index = partition(v, s, e);
+// 		// sort the subarray
+// 		quickSort(v, s, pivot_index - 1);
+// 		quickSort(v, pivot_index + 1, e);
+// 	}
+// }
+// void solve() {
+// 	int n; cin >> n;
+// 	vector<int>v(n); for (int i = 0; i < n; i++)cin >> v[i];
+// 	// bubbleSort(v);
+// 	// insertionSort(v);
+// 	// selectionSort(v);
+// 	// mergeSorting(v, 0, n - 1);
+// 	// quickSort(v, 0, n - 1);
+// 	each(v);
+// }
+// int main() {
+// 	solve();
+// 	return 0;
+// }
+
+
+
+
+
+
+
 
 
 
