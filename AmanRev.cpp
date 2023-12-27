@@ -164,51 +164,59 @@
 //Queue with the Array
 // circular Queue
 
-// #include <bits/stdc++.h>
-// using namespace std;
-// #define en cout<<"\n";
+#include <bits/stdc++.h>
+using namespace std;
+#define en cout<<"\n";
 
-// #define cap 5
-// typedef struct queue {
-// 	int front, rear, sz, arr[cap];
-// } Queue;
-// void ini(Queue *& q) {
-// 	q->front = 0, q->rear = -1, q->sz = 0;
-// }
-// int isEmpty(Queue * q) {return q->sz == 0;}
-// int isFull(Queue * q) {return q->sz == cap;}
-// void enqueue(Queue * q, int data) { // from the rear part
-// 	if (isFull(q)) return;
-// 	q->rear = (q->rear + 1) % cap;
-// 	q->arr[q->rear] = data;
-// 	q->sz++;
-// }
-// int dequeue(Queue * q) {
-// 	if (isEmpty(q)) return 0;
-// 	int temp = q->front;
-// 	q->front = (q->front + 1) % cap;
-// 	q->sz--;
-// 	return temp;
-// }
-// int peekElement(Queue * q) {
-// 	if (isEmpty(q))return 0;
-// 	return q->arr[q->front];
-// }
-// void printQueue(Queue * q) {
-// 	if (isEmpty(q))return;
-// 	for (int i = 0; i < q->sz; i++) cout << q->arr[(q->front + i) % cap] << " ";
-// }
-// int main() {
-// 	Queue *q = new Queue; ini(q);
-// 	enqueue(q, 10);
-// 	enqueue(q, 20);
-// 	enqueue(q, 30);
-// 	printQueue(q); en
-// 	cout << "Dequeue : " << dequeue(q); en
-// 	cout << "Peek : " << peekElement(q); en
-// 	printQueue(q); en
-// 	return 0;
-// }
+#define cap 5
+typedef struct queue {
+	int front, rear, sz, arr[cap];
+} Queue;
+void initilize(Queue *& q) {
+	q->front = 0, q->rear = -1, q->sz = 0;
+}
+int isEmpty(Queue * q) {return q->sz == 0;}
+int isFull(Queue * q) {return q->sz == cap;}
+void enqueue(Queue * q, int data) { // from the rear part
+	if (isFull(q)) return;
+	q->rear = (q->rear + 1) % cap;
+	q->arr[q->rear] = data;
+	q->sz++;
+}
+int dequeue(Queue * q) {
+	if (isEmpty(q)) return 0;
+	else{
+	int temp = q->arr[q->front];
+	q->front = (q->front + 1) % cap;
+	q->sz--;
+	return temp;
+	}
+}
+int frontElement(Queue * q) {
+	if (isEmpty(q))return 0;
+	return q->arr[q->front];
+}
+int backElement(Queue * q){
+  if (isFull(q)) return 0;
+  return q->arr[q->rear];
+}
+void printQueue(Queue * q) {
+	if (isEmpty(q))return;
+	for (int i = 0; i < q->sz; i++) cout << q->arr[(q->front + i) % cap] << " ";
+}
+int main() {
+	Queue *q = new Queue; initilize(q);
+	enqueue(q, 10);
+	enqueue(q, 20);
+	enqueue(q, 30);
+	printQueue(q); en
+	cout << "Dequeue : " << dequeue(q); en
+	cout<<"after deletion : ";
+	printQueue(q); en
+	cout << "Front : " << frontElement(q); en
+	cout << "Back : " << backElement(q); en
+	return 0;
+}
 /*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
 // Queue with Linked List
